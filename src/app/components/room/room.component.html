@@ -1,0 +1,17 @@
+<ion-item (click)="abrirChat()">
+
+  <ion-avatar slot="start">
+    <img src="/assets/avatars/{{ avatar }}" />
+  </ion-avatar>
+
+  <ion-label>
+    <h2 >{{ nombre }}</h2>
+    <h4 class="ultimoMensaje">
+      <p *ngIf="ultimoMensaje!==''">
+        <strong>{{ usuarioNombre }}</strong>
+        {{ ultimoMensaje }}  
+      </p>
+    </h4>
+  </ion-label>
+
+</ion-item>

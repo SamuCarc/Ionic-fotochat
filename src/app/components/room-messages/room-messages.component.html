@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon name="chevron-back-outline"></ion-icon>  
+      </ion-button>
+
+      <ion-avatar slot="icon-only">
+        <img src="/assets/avatars/{{ avatar }}" />
+      </ion-avatar>
+
+    </ion-buttons>
+
+    <ion-label>
+      <h3 class="nombreRoom">{{ nombre }}</h3>
+      <p class="descripcionRoom">
+          {{ descripcion }}  
+      </p>
+    </ion-label>
+
+  </ion-toolbar>
+
+  
+</ion-header>

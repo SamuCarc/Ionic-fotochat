@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mensajes</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar placeholder="Buscar usuario" 
+                    animated
+                    debounce="700"
+                    [value]=""
+                    (ionChange)="buscar($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <!-- Mientras se buscan los usuarios mostramos un skeleton text -->
+  <div *ngIf="buscando">
+    <ion-item  lines="none" *ngFor="let item of [1,1,1,1,1,1]">
+  
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      </ion-avatar>
+  
+      <ion-label>
+        <h2><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></h2>
+        <h5><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></h5>
+      </ion-label>
+    </ion-item>
+
+  </div>
+
+  <!-- Si no encontramos ningún usuario en la búsqueda ponemos los usuarios
+  con los que tengamos mensajes recientes -->
+  <div *ngIf="usuarios.length == 0 && !buscando">
+
+    
+    <!-- Obtenemos las salas creadas con este usuario -->
+    <app-rooms [rooms]="rooms"></app-rooms>
+
+    <!-- Infinite Scroll -->
+    <ion-infinite-scroll  [disabled]="!habilitado"
+      threshold="150px" (ionInfinite)="siguientes($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  </div>
+
+  <!-- Si encontramos usuarios en la búsqueda los mostramos -->
+  <div *ngIf="usuarios.length !== 0 && !buscando">
+    <ion-item *ngFor="let usuario of usuarios">
+  
+      <ion-avatar slot="start">
+        <img src="/assets/avatars/{{ usuario.avatar }}" />
+      </ion-avatar>
+  
+      <ion-label>
+        <h2 >{{ usuario.nombre.nombres + ' ' + usuario.nombre.apellidos }}</h2>
+        <h5>{{ usuario.email }}</h5>
+      </ion-label>
+    </ion-item>
+  </div>
+
+</ion-content>

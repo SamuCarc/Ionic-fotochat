@@ -1,0 +1,7 @@
+
+
+  <div *ngFor="let room of rooms">
+    <app-room [room]="room"
+              [actualUser]="actualUser"
+              (cargarChat)="verChat(room)"></app-room>
+  </div>
